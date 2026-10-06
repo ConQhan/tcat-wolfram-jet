@@ -42,4 +42,4 @@ golden values from the Python code, and physical checks (second law, power balan
 
 ## License
 
-Developed by ConQhan for the Wolfram Jet team. MIT license, see `LICENSE`.
+Developed by Fatihhan Toprak for the Wolfram Jet team. MIT license, see `LICENSE`.
