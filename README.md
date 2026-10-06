@@ -39,3 +39,7 @@ Gas model: `'ideal'` (constant cp) or `'real'` (temperature dependent cp, NASA p
 The tests compare against textbook cases (Cohen-Rogers, *Gas Turbine Theory*;
 Mattingly, *Aircraft Engine Design* and *Elements of Gas Turbine Propulsion*),
 golden values from the Python code, and physical checks (second law, power balance).
+
+## License
+
+MIT, see `LICENSE`.
