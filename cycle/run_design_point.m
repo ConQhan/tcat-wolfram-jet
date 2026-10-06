@@ -10,7 +10,7 @@ function result = run_design_point(cfg)
 %   Returns: struct(stations, performance, geometries, isa, nozzle_exp,
 %   warnings, success, error_msg)
 
-c = gcam_constants();
+c = tcat_constants();
 R = c.R;
 
 result = struct();

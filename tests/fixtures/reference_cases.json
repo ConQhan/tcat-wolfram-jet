@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Validation data collected from independent sources (textbooks, solved examples in the style of Mattingly and Cohen-Rogers). Each record: source, inputs, reference (book) results, and the assumptions made when translating the case to GCAM. The tests read this file, run the corresponding component or the full cycle, and compare.",
+    "description": "Validation data collected from independent sources (textbooks, solved examples in the style of Mattingly and Cohen-Rogers). Each record: source, inputs, reference (book) results, and the assumptions made when translating the case to TCAT. The tests read this file, run the corresponding component or the full cycle, and compare.",
     "wired": "Records with wired=true are run automatically. Records with wired=false are documented for later and not yet validated automatically."
   },
   "cases": [
@@ -55,7 +55,7 @@
         "delta_T_K": 164.7
       },
       "tolerance_pct": 0.3,
-      "notes": "The book uses cpa = 1.005 kJ/kgK; GCAM uses R = 287.05 and gamma_c = 1.4 -> cpc = 1004.175 J/kgK (0.08 % difference). Tt3 does not depend on cp (only on pressure ratio and efficiency), so a close match is expected."
+      "notes": "The book uses cpa = 1.005 kJ/kgK; TCAT uses R = 287.05 and gamma_c = 1.4 -> cpc = 1004.175 J/kgK (0.08 % difference). Tt3 does not depend on cp (only on pressure ratio and efficiency), so a close match is expected."
     },
     {
       "id": "compressor_gttpt2_ex22",
@@ -107,7 +107,7 @@
       "module": "turbine",
       "type": "turbine_isentropic_work_balance",
       "source": "Cohen-Rogers, Gas Turbine Theory, Example 2.2 (gas generator turbine; pressure ratio from the work balance)",
-      "description": "The turbine pressure ratio is solved backwards so that the turbine just drives the compressor: the same technique as GCAM's isentropic turbine branch.",
+      "description": "The turbine pressure ratio is solved backwards so that the turbine just drives the compressor: the same technique as TCAT's isentropic turbine branch.",
       "inputs": {
         "Tt4_K": 1350.0,
         "Pt4_bar": 10.6,
@@ -123,14 +123,14 @@
         "pressure_ratio_Pt4_over_Pt5": 3.243
       },
       "tolerance_pct": 0.6,
-      "notes": "Called with f = 0: the book neglects the (1+f) factor in the turbine work balance (a known textbook simplification, confirmed in the Example 3.1 check). GCAM's default mode (f included) gives about 0.5 % higher Tt5; this is physically more accurate, not an error. Wc_Jkg = 348130 from the book's Tt3-Tt2 = 346.3 K with cpc = 1004.175 (rounding within tolerance)."
+      "notes": "Called with f = 0: the book neglects the (1+f) factor in the turbine work balance (a known textbook simplification, confirmed in the Example 3.1 check). TCAT's default mode (f included) gives about 0.5 % higher Tt5; this is physically more accurate, not an error. Wc_Jkg = 348130 from the book's Tt3-Tt2 = 346.3 K with cpc = 1004.175 (rounding within tolerance)."
     },
     {
       "id": "combustor_eogtp_real_ex71",
       "module": "combustor",
       "type": "combustor_energy_balance_cpg",
       "source": "Mattingly, Elements of Gas Turbine Propulsion, Chapter 7 (parametric cycle with losses), Example 7-1",
-      "description": "Turbojet combustor fuel/air ratio from the closed-form energy balance Eq. 7-10: f = (cpt*Tt4 - cpc*Tt3) / (eta_b*hPR - cpt*Tt4). This is exactly GCAM's ideal (CPG, constant cpc/cph) combustor formula.",
+      "description": "Turbojet combustor fuel/air ratio from the closed-form energy balance Eq. 7-10: f = (cpt*Tt4 - cpc*Tt3) / (eta_b*hPR - cpt*Tt4). This is exactly TCAT's ideal (CPG, constant cpc/cph) combustor formula.",
       "inputs": {
         "Tt3_K": 810.19,
         "Pt3_bar": 1.0,
@@ -145,7 +145,7 @@
         "f": 0.03567
       },
       "tolerance_pct": 0.7,
-      "notes": "Tt3_K is derived from the book's M0 = 2, T0 = 216.7 K, tau_r = 1.8, tau_c = 2.0771 (pi_c = 10, e_c = 0.9): Tt3 = tau_r*tau_c*T0 = 810.19 K. Pt3_bar is arbitrary: the f calculation does not use it, so only f is checked. With the book's own cpc = 1.004 and cpt = 1.239 kJ/(kg K) the formula gives f = 0.035674 (0.01 % from the book's 0.03567): the formula is identical. The measured difference (0.6 %, GCAM = 0.0359) comes from GCAM deriving cp from a single R = 287.05 and gamma (cph = 1243.9 vs the book's 1239, which uses separate Rc/Rt). Tolerance set to 0.7 %."
+      "notes": "Tt3_K is derived from the book's M0 = 2, T0 = 216.7 K, tau_r = 1.8, tau_c = 2.0771 (pi_c = 10, e_c = 0.9): Tt3 = tau_r*tau_c*T0 = 810.19 K. Pt3_bar is arbitrary: the f calculation does not use it, so only f is checked. With the book's own cpc = 1.004 and cpt = 1.239 kJ/(kg K) the formula gives f = 0.035674 (0.01 % from the book's 0.03567): the formula is identical. The measured difference (0.6 %, TCAT = 0.0359) comes from TCAT deriving cp from a single R = 287.05 and gamma (cph = 1243.9 vs the book's 1239, which uses separate Rc/Rt). Tolerance set to 0.7 %."
     },
     {
       "id": "nozzle_choked_gttpt3_ex31",
@@ -169,7 +169,7 @@
       },
       "tolerance_pct": 0.5,
       "assert_choked": true,
-      "notes": "Fixed: the choked branch used to compute P9 isentropically (eta_n not used). With nozzle_critical_pr_with_loss() (Cohen-Rogers Eq. 3.14) P9 = Pt9/crit_PR and the choking threshold now include eta_n. The difference dropped from 3.3 % to 0.28 % (GCAM 0.6691 bar, book 0.671 bar). crit_PR: GCAM 1.9189 vs book 1.914 (rounding)."
+      "notes": "Fixed: the choked branch used to compute P9 isentropically (eta_n not used). With nozzle_critical_pr_with_loss() (Cohen-Rogers Eq. 3.14) P9 = Pt9/crit_PR and the choking threshold now include eta_n. The difference dropped from 3.3 % to 0.28 % (TCAT 0.6691 bar, book 0.671 bar). crit_PR: TCAT 1.9189 vs book 1.914 (rounding)."
     },
     {
       "id": "nozzle_unchoked_cold_gttpt3_ex32",
@@ -192,7 +192,7 @@
       },
       "tolerance_pct": 0.5,
       "assert_choked": true,
-      "notes": "The fan stream is air (gamma = 1.4), not hot products. Passing gamma_h = 1.4 isolates cold-stream physics at component level (no separate cold nozzle in GCAM's turbojet model). PR = 1.65 is far from the critical ratio (~1.965), so assert_choked = true is safe."
+      "notes": "The fan stream is air (gamma = 1.4), not hot products. Passing gamma_h = 1.4 isolates cold-stream physics at component level (no separate cold nozzle in TCAT's turbojet model). PR = 1.65 is far from the critical ratio (~1.965), so assert_choked = true is safe."
     },
     {
       "id": "nozzle_unchoked_hot_gttpt3_ex32",
@@ -215,7 +215,7 @@
       },
       "tolerance_pct": 0.5,
       "assert_choked": true,
-      "notes": "Fixed: a borderline case (PR = 1.878). The purely isentropic critical ratio (1.852) used to classify it as choked, while the book's critical ratio including eta_j (1.914) says unchoked. With nozzle_critical_pr_with_loss() GCAM's critical ratio is 1.9189 > 1.878, so it is now unchoked as in the book."
+      "notes": "Fixed: a borderline case (PR = 1.878). The purely isentropic critical ratio (1.852) used to classify it as choked, while the book's critical ratio including eta_j (1.914) says unchoked. With nozzle_critical_pr_with_loss() TCAT's critical ratio is 1.9189 > 1.878, so it is now unchoked as in the book."
     },
     {
       "id": "full_cycle_turbojet_gttpt3_ex31",
@@ -223,7 +223,7 @@
       "type": "full_engine_config",
       "source": "Cohen-Rogers, Gas Turbine Theory, Example 3.1 (simple turbojet design point)",
       "description": "Full cycle: inlet -> compressor -> combustor -> turbine -> choked convergent nozzle. The most complete test.",
-      "gcam_config": {
+      "model_config": {
         "M0": 0.8,
         "altitude_m": 10000.0,
         "use_dynamic_mdot": false,
@@ -265,14 +265,14 @@
         "P9_bar": 2.0,
         "F_spec_Nskg": 4.5
       },
-      "notes": "pi_d_max = 0.9729 is back-calculated so that the MIL-E-5008B model matches the book's inlet loss model (eta_i = 0.93). FHV is not given in the book; standard kerosene 43.1 MJ/kg is assumed. The whole Tt5/Pt5/T9 difference comes from the book neglecting (1+f) in the turbine work balance (GCAM is more accurate). The P9/F_spec difference was reduced by the eta_n critical pressure fix: P9 5.30 % -> 1.65 %, F_spec 4.99 % -> 3.99 %; the rest comes from Tt5/Pt5, not from the nozzle."
+      "notes": "pi_d_max = 0.9729 is back-calculated so that the MIL-E-5008B model matches the book's inlet loss model (eta_i = 0.93). FHV is not given in the book; standard kerosene 43.1 MJ/kg is assumed. The whole Tt5/Pt5/T9 difference comes from the book neglecting (1+f) in the turbine work balance (TCAT is more accurate). The P9/F_spec difference was reduced by the eta_n critical pressure fix: P9 5.30 % -> 1.65 %, F_spec 4.99 % -> 3.99 %; the rest comes from Tt5/Pt5, not from the nozzle."
     }
   ],
   "deferred_cases_summary": [
-    "Mattingly AAF mixed-flow afterburning turbofan full-cycle examples (Sample Printout A/B/C): imperial units and a two-spool bypass architecture that does not map directly to GCAM's simplified turbofan model.",
+    "Mattingly AAF mixed-flow afterburning turbofan full-cycle examples (Sample Printout A/B/C): imperial units and a two-spool bypass architecture that does not map directly to the simplified turbofan model of the Python code.",
     "Combustion chemistry / stoichiometry examples (atom balance, equivalence ratio phi): no independent atom-balance example found to test the real_gas product mixture assumption (C12H23, phi_eq = f/FST).",
-    "Cohen-Rogers Examples 2.1/2.2/2.3 combustor f values were tried and left out on purpose: the book reads f from temperature-rise charts, GCAM uses the FHV energy balance. Reproducing Example 2.2's f = 0.0204 would need FHV = 46.82 MJ/kg, which is unrealistic. Covered instead by Mattingly Example 7-1 ('combustor_eogtp_real_ex71').",
+    "Cohen-Rogers Examples 2.1/2.2/2.3 combustor f values were tried and left out on purpose: the book reads f from temperature-rise charts, TCAT uses the FHV energy balance. Reproducing Example 2.2's f = 0.0204 would need FHV = 46.82 MJ/kg, which is unrealistic. Covered instead by Mattingly Example 7-1 ('combustor_eogtp_real_ex71').",
     "GasTurb compressor map scaling examples: they depend on GasTurb's internal generic map data, which is not available.",
-    "Mattingly Table 5.2 (single-stage impulse turbine off-design, blade speed sweep): a blade/aerodynamic level calculation, not comparable with GCAM's thermodynamic cycle model."
+    "Mattingly Table 5.2 (single-stage impulse turbine off-design, blade speed sweep): a blade/aerodynamic level calculation, not comparable with TCAT's thermodynamic cycle model."
   ]
 }

@@ -2,7 +2,7 @@ function [st0, st_t2, V0, pi_d_eff] = diffuser_run(M0, T0, P0, gamma_c, pi_d_max
 %DIFFUSER_RUN _InletDiffuser.run() port (engine_core.py:221-247).
 %   use_mil_spec is always true, the only mode used in this port (see the
 %   DiffuserComponent default, component_interface.py:73-74).
-R = gcam_constants().R;
+R = tcat_constants().R;
 if strcmp(gas_model, 'real')
     cp0 = cp_T(T0, 'air');
     gamma0 = cp0 / (cp0 - R);

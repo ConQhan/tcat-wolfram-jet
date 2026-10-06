@@ -1,6 +1,6 @@
 function [st_t3, Wc, eta_c_act] = compressor_run(st_in, gamma_c, pi_c, eta_c, use_polytropic, e_c, gas_model)
 %COMPRESSOR_RUN _Compressor.run() port (engine_core.py:250-290).
-R = gcam_constants().R;
+R = tcat_constants().R;
 Tt2 = st_in.T_total; Pt2 = st_in.P_total;
 Pt3 = Pt2 * pi_c;
 

@@ -1,6 +1,6 @@
 function [st_t4, f] = combustor_run(st_in, Tt4, gamma_c, gamma_h, pi_b, eta_b, FHV, gas_model)
 %COMBUSTOR_RUN _Combustor.run() port (engine_core.py:293-331).
-R = gcam_constants().R;
+R = tcat_constants().R;
 Tt3 = st_in.T_total; Pt3 = st_in.P_total;
 Pt4 = Pt3 * pi_b;
 
@@ -15,15 +15,15 @@ if strcmp(gas_model, 'real')
         num = h4 - h3;
         den = FHV*eta_b - h4;
         if den <= 0
-            error('gcam:combustor:denNonPositive', ...
+            error('tcat:combustor:denNonPositive', ...
                 'Combustor: FHV*eta_b < cph*Tt4. Tt4=%.0fK.', Tt4);
         end
         if num < 0
-            error('gcam:combustor:numNegative', ...
+            error('tcat:combustor:numNegative', ...
                 'Tt4(%.0fK) < Tt3(%.1fK).', Tt4, Tt3);
         end
         f_new = num/den;
-        phi_new = f_new / gcam_constants().FST_C12H23;
+        phi_new = f_new / tcat_constants().FST_C12H23;
         if abs(phi_new - phi_eq) < 1e-6
             phi_eq = phi_new;
             break
@@ -41,11 +41,11 @@ cph = gamma_h*R/(gamma_h-1.0);
 num = cph*Tt4 - cpc*Tt3;
 den = FHV*eta_b - cph*Tt4;
 if den <= 0
-    error('gcam:combustor:denNonPositive', ...
+    error('tcat:combustor:denNonPositive', ...
         'Combustor: FHV*eta_b < cph*Tt4. Tt4=%.0fK.', Tt4);
 end
 if num < 0
-    error('gcam:combustor:numNegative', ...
+    error('tcat:combustor:numNegative', ...
         'Tt4(%.0fK) < Tt3(%.1fK).', Tt4, Tt3);
 end
 f = num/den;

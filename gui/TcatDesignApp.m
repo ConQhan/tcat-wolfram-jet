@@ -1,10 +1,10 @@
-classdef GcamDesignApp < matlab.apps.AppBase
-    %GCAMDESIGNAPP User interface for the turbojet design point and the
+classdef TcatDesignApp < matlab.apps.AppBase
+    %TCATDESIGNAPP User interface for the turbojet design point and the
     %   parametric sweep. Hand-written with standard uifigure/uigridlayout
     %   components (plain MATLAB code, not the binary .mlapp format).
     %
     %   Usage: run launch.m, or after addpath(genpath(<tool folder>)) type
-    %       GcamDesignApp
+    %       TcatDesignApp
     %
     %   The app only calls the calculation files (cycle/run_design_point.m,
     %   sweep/param_sweep.m, config/default_engine_config.m); it does not
@@ -109,7 +109,7 @@ classdef GcamDesignApp < matlab.apps.AppBase
 
             app.UIFigure = uifigure('Visible','off');
             app.UIFigure.Position = [60 40 1500 940];
-            app.UIFigure.Name = 'GCAM Turbojet Design Tool';
+            app.UIFigure.Name = 'TCAT - Turbojet Cycle Analysis Tool';
 
             app.TabGroup = uitabgroup(app.UIFigure);
             app.TabGroup.Position = [0 0 1500 940];
@@ -893,7 +893,7 @@ classdef GcamDesignApp < matlab.apps.AppBase
             scr = get(0, 'ScreenSize');
             w = round(scr(3) * 0.78); h = round(scr(4) * 0.80);
             x = round((scr(3) - w) / 2); y = round((scr(4) - h) / 2);
-            fig2 = figure('Name', 'GCAM parametric sweep - full screen', ...
+            fig2 = figure('Name', 'TCAT parametric sweep - full screen', ...
                 'NumberTitle', 'off', 'Color', 'w', 'Position', [x y w h]);
             ax2 = axes(fig2);
             app.drawSweepPlot(ax2);
@@ -902,7 +902,7 @@ classdef GcamDesignApp < matlab.apps.AppBase
 
     % -- App life cycle -------------------------------------------------
     methods (Access = public)
-        function app = GcamDesignApp
+        function app = TcatDesignApp
             createComponents(app)
             registerApp(app, app.UIFigure)
             if nargout == 0

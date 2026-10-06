@@ -109,7 +109,7 @@ for i = 1:nTotal
         else
             failIds(idKey) = 1;
         end
-        if isempty(err.identifier) || ~startsWith(err.identifier, 'gcam:')
+        if isempty(err.identifier) || ~startsWith(err.identifier, 'tcat:')
             unexpectedErrors{end+1} = sprintf('case %d: [%s] %s', i, idKey, err.message); %#ok<AGROW>
         end
         nFail = nFail + 1;
@@ -177,7 +177,7 @@ for i = 1:numel(ks)
     fprintf('  %-60s : %d\n', ks{i}, failIds(ks{i}));
 end
 
-fprintf('\n--- Unexpected errors (no gcam: identifier): %d ---\n', numel(unexpectedErrors));
+fprintf('\n--- Unexpected errors (no tcat: identifier): %d ---\n', numel(unexpectedErrors));
 for i = 1:numel(unexpectedErrors)
     fprintf('  %s\n', unexpectedErrors{i});
 end

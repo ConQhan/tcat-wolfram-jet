@@ -18,7 +18,7 @@ for i = 1:numel(raw.cases)
     end
 end
 ref = cs.reference_outputs;
-gc  = cs.gcam_config;
+gc  = cs.model_config;
 
 cfg = default_engine_config();
 cfg.M0 = gc.M0; cfg.altitude_m = gc.altitude_m;
@@ -65,5 +65,5 @@ fprintf('\nCASE: M0=%.2f  altitude=%.0fm  pi_c=%.1f  Tt4=%.0fK  (Cohen-Rogers Ex
     cfg.M0, cfg.altitude_m, cfg.pi_c, cfg.Tt4);
 disp(T)
 fprintf(['NOTE: the Tt5/Pt5/T9/P9/F_spec difference (~0.5-4%%) comes from the book\n' ...
-    'neglecting the (1+f) factor in the turbine work balance; GCAM/MATLAB is\n' ...
+    'neglecting the (1+f) factor in the turbine work balance; TCAT is\n' ...
     'more accurate here, this is not a port error (see reference_cases.json).\n']);

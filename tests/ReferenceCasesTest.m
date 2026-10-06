@@ -124,7 +124,7 @@ classdef ReferenceCasesTest < matlab.unittest.TestCase
         function testFullCycle(testCase)
             id = 'full_cycle_turbojet_gttpt3_ex31';
             cs = testCase.Cases.(id);
-            gc = cs.gcam_config;
+            gc = cs.model_config;
 
             cfg = default_engine_config();
             cfg.M0 = gc.M0; cfg.altitude_m = gc.altitude_m;

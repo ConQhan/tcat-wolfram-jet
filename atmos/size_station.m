@@ -5,23 +5,23 @@ function geo = size_station(station_id, m_dot, Tt, Pt, M_design, gamma)
 %   Returns: struct(station_id,M_design,area_m2,diameter_mm,Tt,Pt,m_dot)
 
 if Pt <= 0 || Tt <= 0
-    error('gcam:size_station:invalidState', ...
+    error('tcat:size_station:invalidState', ...
         'Station %s: Pt=%.2f Pa, Tt=%.2f K - positive values required.', ...
         station_id, Pt, Tt);
 end
 if M_design <= 0
-    error('gcam:size_station:invalidMach', ...
+    error('tcat:size_station:invalidMach', ...
         'Station %s: design Mach number must be > 0.', station_id);
 end
 
 MFP_val = mfp(M_design, gamma);
 if MFP_val <= 0
-    error('gcam:size_station:invalidMFP', ...
+    error('tcat:size_station:invalidMFP', ...
         'Station %s: MFP evaluated to zero (M=%g, gamma=%g).', ...
         station_id, M_design, gamma);
 end
 
-R = gcam_constants().R;
+R = tcat_constants().R;
 area    = (m_dot * sqrt(R * Tt)) / (Pt * MFP_val);
 diam_mm = sqrt(area / pi) * 2.0 * 1000.0;
 

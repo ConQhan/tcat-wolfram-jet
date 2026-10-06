@@ -11,7 +11,7 @@ disp(table(results));
 
 nfail = nnz(~[results.Passed]);
 if nfail > 0
-    error('gcam:tests:failed', '%d/%d tests failed.', nfail, numel(results));
+    error('tcat:tests:failed', '%d/%d tests failed.', nfail, numel(results));
 else
     fprintf('\nALL TESTS PASSED: %d/%d\n', numel(results), numel(results));
 end

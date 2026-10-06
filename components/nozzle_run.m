@@ -2,16 +2,16 @@ function [st_9, V9, A_th, A_exit, noz_exp] = nozzle_run(st_in, P_amb, m_dot_tota
                                     m_dot_inlet, V0, gamma_h, f, eta_n, pi_n, gas_model, nozzle_type)
 %NOZZLE_RUN _CDNozzle.run() port (engine_core.py:464-549).
 if nargin < 7 || isempty(f), f = 0.0; end
-R = gcam_constants().R;
+R = tcat_constants().R;
 Tt5 = st_in.T_total; Pt5 = st_in.P_total;
 Pt9 = Pt5 * pi_n;
 if Pt9 < P_amb
-    error('gcam:nozzle:infeasible', ...
+    error('tcat:nozzle:infeasible', ...
         'Nozzle: Pt9=%.0fPa < P_amb=%.0fPa. The engine cannot produce thrust with these inputs.', Pt9, P_amb);
 end
 
 if strcmp(gas_model, 'real')
-    phi_eq = f / gcam_constants().FST_C12H23;
+    phi_eq = f / tcat_constants().FST_C12H23;
     cp5 = cp_T(Tt5, 'products', phi_eq);
     gamma_use = cp5 / (cp5 - R);
 else
@@ -35,7 +35,7 @@ if choked_conv
         cph = gamma_h*R/(gamma_h-1.0);
     end
     if T9 <= 0
-        error('gcam:nozzle:negativeT9', 'Nozzle T9 negative: %.1fK', T9);
+        error('tcat:nozzle:negativeT9', 'Nozzle T9 negative: %.1fK', T9);
     end
     V9 = sqrt(gamma_use * R * T9);
     gamma_a9 = gamma_use;
@@ -51,7 +51,7 @@ else
         h9 = h5 - eta_n*(h5 - h9_ideal);
         T9 = T_from_h(h9, 'products', T9_ideal, phi_eq);
         if T9 <= 0
-            error('gcam:nozzle:negativeT9', 'Nozzle T9 negative: %.1fK', T9);
+            error('tcat:nozzle:negativeT9', 'Nozzle T9 negative: %.1fK', T9);
         end
         V9  = sqrt(2.0 * (h5 - h9));
         cph = cp_T(T9, 'products', phi_eq);
@@ -60,7 +60,7 @@ else
         pr_term = (P_amb/Pt9) ^ ((gamma_h-1.0)/gamma_h);
         T9 = Tt5 - eta_n*Tt5*(1.0 - pr_term);
         if T9 <= 0
-            error('gcam:nozzle:negativeT9', 'Nozzle T9 negative: %.1fK', T9);
+            error('tcat:nozzle:negativeT9', 'Nozzle T9 negative: %.1fK', T9);
         end
         V9 = sqrt(2.0 * cph * (Tt5 - T9));
     end

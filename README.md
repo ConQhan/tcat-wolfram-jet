@@ -1,8 +1,9 @@
-# GCAM MATLAB - Turbojet Design Point Tool
+# TCAT - Turbojet Cycle Analysis Tool
 
-MATLAB port of the turbojet design-point part of GCAM, our Python gas turbine
-cycle analysis code. Calculates the cycle station by station, the performance
-(specific thrust, TSFC, efficiencies) and the station flow areas.
+MATLAB tool for turbojet design point cycle analysis, ported from the turbojet
+design-point part of our Python gas turbine cycle code. Calculates the cycle
+station by station, the performance (specific thrust, TSFC, efficiencies) and
+the station flow areas.
 
 ## Start
 

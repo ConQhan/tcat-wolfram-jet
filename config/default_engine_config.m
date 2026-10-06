@@ -10,7 +10,7 @@ function cfg = default_engine_config()
 %   solver). "m_dot_fixed" is simplified to "m_dot" (with no dynamic mass
 %   flow branch it is the only mass flow source).
 
-c = gcam_constants();
+c = tcat_constants();
 
 cfg = struct();
 

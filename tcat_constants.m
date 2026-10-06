@@ -1,7 +1,7 @@
-function C = gcam_constants()
-%GCAM_CONSTANTS Single source of constants (counterpart of Python constants.py).
+function C = tcat_constants()
+%TCAT_CONSTANTS Single source of constants (counterpart of Python constants.py).
 %   Only the subset used by the turbojet design-point port is included.
-%   Source: GCAM/constants.py
+%   Source: constants.py of our Python cycle code (GCAM)
 
 % ---- 1. CPG gas constants ----
 C.R      = 287.05;                       % Gas constant of air [J/(kg*K)]

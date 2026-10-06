@@ -1,5 +1,5 @@
 classdef GuiRobustnessTest < matlab.unittest.TestCase
-    %GUIROBUSTNESSTEST Regression tests: GcamDesignApp must not crash on
+    %GUIROBUSTNESSTEST Regression tests: TcatDesignApp must not crash on
     %   bad or extreme inputs, must show an error and recover. The app is
     %   created, controls are found with findall and their callbacks are
     %   called directly (works in matlab -batch). If a callback throws an
@@ -13,7 +13,7 @@ classdef GuiRobustnessTest < matlab.unittest.TestCase
 
     methods (TestMethodSetup)
         function createApp(testCase)
-            testCase.App = GcamDesignApp;
+            testCase.App = TcatDesignApp;
             figs = findall(groot, 'Type', 'figure');
             testCase.Fig = figs(1);
         end

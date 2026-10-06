@@ -39,7 +39,7 @@ classdef PhysicalSanityTest < matlab.unittest.TestCase
             %   nomenclature). Unlike the single local cp approximation of the
             %   `entropy` field (cpg_entropy.m), this integrates cp(T)/T.
             if nargin < 6, phi_eq = 0.35; end
-            R = gcam_constants().R;
+            R = tcat_constants().R;
             ds = (phi_T(T2, species, phi_eq) - phi_T(T1, species, phi_eq)) - R*log(P2/P1);
         end
     end
@@ -118,7 +118,7 @@ classdef PhysicalSanityTest < matlab.unittest.TestCase
                 testCase.assumeTrue(r.success);
                 s = r.stations; p = r.performance;
                 if strcmp(cfg.gas_model, 'real')
-                    phi_eq = p.f_core / gcam_constants().FST_C12H23;
+                    phi_eq = p.f_core / tcat_constants().FST_C12H23;
                     ds = PhysicalSanityTest.realGasEntropyChange( ...
                         s.t4.T_total, s.t4.P_total, s.t5.T_total, s.t5.P_total, 'products', phi_eq);
                 else
@@ -139,7 +139,7 @@ classdef PhysicalSanityTest < matlab.unittest.TestCase
                 testCase.assumeTrue(r.success);
                 s = r.stations; p = r.performance;
                 if strcmp(cfg.gas_model, 'real')
-                    phi_eq = p.f_core / gcam_constants().FST_C12H23;
+                    phi_eq = p.f_core / tcat_constants().FST_C12H23;
                     ds = PhysicalSanityTest.realGasEntropyChange( ...
                         s.t5.T_total, s.t5.P_total, s.s9.T_static, s.s9.P_static, 'products', phi_eq);
                 else
@@ -157,7 +157,7 @@ classdef PhysicalSanityTest < matlab.unittest.TestCase
             % thermodynamic proof: a wiring check that catches regressions
             % such as W_offtake being dropped.
             cfgs = PhysicalSanityTest.sampleConfigs();
-            R = gcam_constants().R;
+            R = tcat_constants().R;
             for i = 1:numel(cfgs)
                 cfg = cfgs{i};
                 cfg.power_offtake_kW = 50.0;  % non-zero so the offtake term is covered
@@ -166,7 +166,7 @@ classdef PhysicalSanityTest < matlab.unittest.TestCase
                 s = r.stations; p = r.performance;
                 if strcmp(cfg.gas_model, 'real')
                     Wc_chk = h_T(s.t3.T_total, 'air') - h_T(s.t2.T_total, 'air');
-                    phi_eq = p.f_core / gcam_constants().FST_C12H23;
+                    phi_eq = p.f_core / tcat_constants().FST_C12H23;
                     Wt_chk = h_T(s.t4.T_total, 'products', phi_eq) - h_T(s.t5.T_total, 'products', phi_eq);
                 else
                     cpc = cfg.gamma_c*R/(cfg.gamma_c-1.0);
